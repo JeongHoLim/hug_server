@@ -15,5 +15,10 @@ class Diary(models.Model):
     sadness = models.IntegerField(default=0)
     surprise = models.IntegerField(default=0)
 
+    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    counted = models.BooleanField(default=False)
+
     def __str__(self):
         return self.title

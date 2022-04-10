@@ -1,28 +1,30 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from users.models import Users
+from diary.models import Diary
 from rest_framework import status
 from rest_framework.response import Response
-# Create your views here.
+from .serializers import UserSerializer
 
-# class QuoteDetail(APIView):
+class UserDetail(APIView):
 
-#     def get(self, request, theme_id, format=None):
-#         quotes = Quote.objects.filter(theme_id = theme_id)
-#         if not quotes:
-#             return Response({"msg" : "데이터 없음"},status=status.HTTP_404_NOT_FOUND)
-#         serializer = QuoteSerializer(quotes[random.randint(0,len(quotes)-1)])
+    def get(self, request, user_id, format=None):
+        user = Users.objects.filter(id = user_id)
+        if not user:
+            return Response({"msg" : "존재하지 않는 유저"},status=status.HTTP_404_NOT_FOUND)
+        serializer = UserSerializer(user,many=True)
 
-#         return Response(serializer.data)
+        return Response(serializer.data)
     
+    def put(self,request,user_id,format=None):
+        user = Users.objects.filter(id = user_id)
+        if not user:
+            return Response({"msg" : "존재하지 않는 유저"},status=status.HTTP_404_NOT_FOUND)
 
-# class QuoteList(APIView):
+        diaries = Diary.objects.filter(user_id = user_id)
+        if not diaries :
+            return Response(status=status.HTTP_200_OK)
+        print(diaries)
 
-#     def get(self,request,theme_id,format=None):
-#         quotes = Quote.objects.filter(theme_id = theme_id)
-#         if not quotes:
-#             return Response({"msg" : "데이터 없음"},status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_200_OK)
 
-#         serializer = QuoteSerializer(quotes,many=True)
-
-#         return Response(serializer.data)

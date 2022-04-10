@@ -6,4 +6,9 @@ class DiarySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Diary
-        exclude = ["id"]
+        exclude = ["user","created_at","updated_at","counted"]
+
+class DiarySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Diary
+        exclude = ["user"]
