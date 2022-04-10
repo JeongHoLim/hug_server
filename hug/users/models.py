@@ -1,12 +1,11 @@
 from django.db import models
-from users.models import Users
+from django.contrib.auth.models import User
 
 # Create your models here.
-class Diary(models.Model):
-    user = models.ForeignKey(Users,on_delete=models.CASCADE)
-    title = models.CharField(max_length=20,blank=True)
-    content = models.CharField(max_length=100)
-    result = models.IntegerField()
+
+class Users(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    nick_name = models.CharField(max_length=10)
     happiness = models.IntegerField(default=0)
     angry = models.IntegerField(default=0)
     disgust = models.IntegerField(default=0)
@@ -16,4 +15,4 @@ class Diary(models.Model):
     surprise = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.title
+        return self.nick_name

@@ -37,6 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "diary.apps.DiaryConfig",
+    'users.apps.UsersConfig',
+    "drf_yasg",
+    "rest_framework",
+    "quote.apps.QuoteConfig",
 ]
 
 MIDDLEWARE = [
